@@ -45,18 +45,14 @@ public:
         while(!s.empty())
         {
             auto p = *(s.begin());
-
             T node = p.second;
-
             int nodedist = p.first;
             s.erase(s.begin());
             for(auto neighbour : m[node])
             {
-
-
                 if(dist[neighbour.first]> nodedist + neighbour.second)
                 {
-                     T dest=neighbour.first;
+                T dest=neighbour.first;
                 auto f = s.find(make_pair(dist[dest],dest));
                 if(f!=s.end())
                 {
@@ -67,14 +63,11 @@ public:
                 }
 
             }
-
         }
-
         for(auto d:dist)
         {
             cout<<d.first<<"  is located at "<<d.second<<"\n";
         }
-
     }
 };
 int main()
@@ -92,3 +85,4 @@ int main()
 
 
 }
+

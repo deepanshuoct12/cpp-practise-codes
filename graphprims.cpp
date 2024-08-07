@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-
 #define inf 1e9
 class graph{
 public:
@@ -22,12 +21,13 @@ public:
     {
 
         int minvertex = -1;
-
+         int minval=INT_MAX;
         for(int i=0;i<v;i++)
         {
-            if(!visited[i] && (minvertex==-1 ||  weight[i]<weight[minvertex]))
+            if(!visited[i] && (minvertex==-1 ||  weight[i]<minval))
             {
                 minvertex=i;
+                minval=weight[i];
             }
         }
 

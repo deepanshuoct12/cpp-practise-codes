@@ -6,6 +6,7 @@
 using namespace std;
 template < typename T>
 
+
 class Graph
 {
     map<T,list<T> >adjlist;
@@ -28,26 +29,22 @@ public:
 
     void print()
     {
-//        template<typename T>
-      /*  map<T,list<T> >::iterator it;
-        for(it = adjlist.begin() ;it!=adjlist.end() ;it++)
-        {
-            cout<<it->first<<"->"<<it->second;
-        }*/
+
         for(auto i:adjlist)
         {
-             cout<<i.first;
+             cout<<i.first<<"-->";
                for(T entry : i.second)
                      {cout<<entry<<",";
                      }
+                     cout<<"\n";
         }
-        cout<<"\n";
+
     }
 
      void dfshelper(T src, map<T,bool> &visited,list<T> &ordering)
      {
          visited[src]=true;
-        // cout<<src<<" ";
+         cout<<src<<" ";
 
          for(auto i : adjlist[src])
          {
@@ -59,22 +56,7 @@ public:
 
          ordering.push_front(src);
      }
-    void dfs(T src)
-     {
 
-         map<T,bool> visited;
-         int componenet =1;
-         dfshelper(src,visited);
-
-         for(auto i:adjlist)
-         {
-             T city = i.first;
-             if(!visited[city])
-             {
-                 dfshelper(city,visited);
-             }
-         }
-     }
 
      void dfstopologicalsort()
      {
@@ -83,7 +65,7 @@ public:
          map<T,bool> visited;
          for(auto i : adjlist)
          {  T node = i.first;
-             if(visited[node]==false)
+             if(!visited[node])
              {
                  dfshelper(node ,visited,ordering);
              }
@@ -96,30 +78,6 @@ public:
 
      }
 
-    void bfs(T src)
-    {
-         queue<T>q;
-        map<T,bool> visited;
-        map<T,int>distance;
-        map<T,T>parent;
-        q.push_back(src);
-        visited[src]=true;
-        while(!q.empty())
-        {
-            T node=q.front();
-            cout<<node<<" ";
-            q.pop();
-
-            for(auto neighbour: adjlist[node])
-            {
-                if(!visited[neighbour])
-                {
-                    q.push_back(neighbour);
-                    visited[neighbour]=true;
-                }
-            }
-        }
-    }
 
       void bfstopologicalsort()
       {
@@ -174,7 +132,8 @@ int main()
    g.addedge(1,2,false);
    g.addedge(2,3,false);
 
-     g.bfstopologicalsort();
+     g.dfs(0);
+     g.print();
 
 }
 

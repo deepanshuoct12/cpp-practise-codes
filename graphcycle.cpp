@@ -62,7 +62,8 @@ public:
 
              }
          }
-          return false;
+ return false;
+
      }
     void dfsdetectcycle()
      {
@@ -127,7 +128,8 @@ public:
                 }
                 else if(visited[neighbour]==false)
                 {
-                    parent[node]=neighbour;
+                    // parent[node]=neighbour;
+                    parent[neighbour]=node;
                      q.push(neighbour);
                     visited[neighbour]=true;
                 }

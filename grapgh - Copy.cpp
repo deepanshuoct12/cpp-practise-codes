@@ -1,6 +1,7 @@
 #include<iostream>
 #include<vector>
 using namespace std;
+//#include "solution.h"
 
 using namespace std;
 void connectedcomponents2(int **adj,int V,int start,vector<bool>&visited)

@@ -5,6 +5,7 @@
 #include<queue>
 #include<climits>
 using namespace std;
+#define int long long int
 template < typename T>
 
 class Graph
@@ -78,30 +79,31 @@ public:
             }
         }
 
-        T temp = dest;
-        while(temp!=src)
-        {
-            //cout<<temp<<"<--";
-            temp=parent[temp];
-        }
+        // T temp = dest;
+        // while(temp!=src)
+        // {
+        //     //cout<<temp<<"<--";
+        //     temp=parent[temp];
+        // }
        // cout<<src;
-        cout<<"\n";
+        //cout<<"\n";
         return dist[dest];
     }
 
 
 };
 
-int main()
+int32_t main()
 {
 
-
+ios_base:: sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 
          int t;cin>>t;
          while(t--){
 
                 int n;
-				int board[150]={0};
+				int board[101]={0};
 				Graph<int> g;
          cin>>n;
          while(n--){
@@ -142,7 +144,7 @@ int main()
          }
               // g.print();
 
-     cout<<g.bfs(0,100)<<"\n";
+     cout<<g.bfs(1,100)<<"\n";
          }
 
 }

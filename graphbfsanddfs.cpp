@@ -45,21 +45,7 @@ public:
 
     }
 
-     void dfshelper(T src, map<T,bool> &visited,list<T> &ordering)
-     {
-         visited[src]=true;
-         cout<<src<<" ";
 
-         for(auto i : adjlist[src])
-         {
-             if(!visited[i])
-             {
-                 dfshelper(i,visited,ordering);
-             }
-         }
-
-         ordering.push_front(src);
-     }
     void dfs(T src)
      {
 
@@ -85,7 +71,7 @@ public:
          map<T,bool> visited;
          for(auto i : adjlist)
          {  T node = i.first;
-             if(!visited[node])
+             if(visited[node]==false)
              {
                  dfshelper(node ,visited,ordering);
              }

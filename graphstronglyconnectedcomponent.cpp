@@ -46,7 +46,9 @@ for(int i=0;i<m;i++)
  for(int i=0;i<visited.size();i++)
   visited[i]=false;
 int col=1;
-reverse(order.begin(),order.end());
+
+
+
  for(int i=n-1;i>=0;i--)
  {
      if(!visited[order[i]])
@@ -57,7 +59,7 @@ reverse(order.begin(),order.end());
  }
  for(int i=1;i<=n;i++)
  cout<<comp[i]<<" ";
- cout<<"\n"<<col;
+ cout<<"\n"<<"componenets="<<col-1;
 return 0;
 }
 

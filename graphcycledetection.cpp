@@ -20,18 +20,11 @@ public :
     bool iscyclehelper(T node,map<T,bool> &visited ,map<T,bool> &instack){
     visited[node]=true;
     instack[node]=true;
-    for(auto nbr : adjlist[node]){
+    for(auto neighbour : adjlist[node]){
 
-        if(!visited[nbr])
-        {
-            if(iscyclehelper(neighbour,visited,instack))
+        if(!visited[neighbour] && iscyclehelper(neighbour,visited,instack)|| instack[neighbour]){
             return true;
         }
-        else if(instack[nbr])
-        return true;
-      //  if(!visited[neighbour] && iscyclehelper(neighbour,visited,instack)|| instack[neighbour]){
-        //    return true;
-        //}
     }
     instack[node]=false;
     return false;

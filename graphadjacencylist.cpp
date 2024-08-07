@@ -6,7 +6,7 @@ using namespace std;
 class Graph{
 
 int V;
-list<int> *l;
+list<int>*l;
 public:
 Graph(int v)
 {   V=v;

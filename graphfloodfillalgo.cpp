@@ -46,6 +46,7 @@ int32_t main()
     int color;
     cin>>color;
     floodfill(input,2,1,character,color);
+
      for(int i=0;i<n;i++)
     {
         for(int j=0;j<m;j++)
