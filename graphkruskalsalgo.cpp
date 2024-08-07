@@ -1,0 +1,170 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+class edge
+{
+    public:
+    int src,dest,weight;
+
+};
+
+class Set{
+
+public:
+    int rank;
+    int parent;
+};
+
+int findset(Set *set,int i)
+{
+    if(set[i].parent!=i)
+    {
+       set[i].parent= findset(set,set[i].parent);
+    }
+    return set[i].parent;
+
+}
+
+void Union(Set *set,int v1,int v2)
+{
+    int v1_root = findset(set,v1);
+    int v2_root = findset(set,v2);
+
+    if(set[v1_root].rank<set[v2_root].rank)
+    {
+        set[v1_root].parent=v2_root;
+    }
+    else if(set[v1_root].rank>set[v2_root].rank)
+    {
+        set[v2_root].parent=v1_root;
+    }
+    else
+    {
+        set[v2_root].parent=v1_root;
+        set[v1_root].rank++;
+    }
+}
+
+bool cmp(edge e1,edge e2)
+{
+    return e1.weight<e2.weight;
+}
+
+void kruskal(edge *input,int n,int e)
+{
+ sort(input, input+e,cmp);
+ //for(int i=0;i<e;i++)
+   //  cout<<input[i].src<<":"<<input[i].dest<<":"<<input[i].weight<<"\n";
+  edge *output = new edge[n-1];
+  Set *set = new Set[n];
+  for(int i=0;i<n;i++)
+  {
+      set[i].parent =i;
+      set[i].rank = 0;
+  }
+  int counter=0,i=0;
+
+  while(counter <n-1)
+  {
+      edge currentedge = input[i];
+      int parent1= findset(set,currentedge.src);
+      int parent2= findset(set,currentedge.dest);
+
+      if(parent1 != parent2)
+      {
+          output[counter]=currentedge;
+          Union(set,parent1,parent2);
+          counter++;
+      }
+      i++;
+  }
+  /*cout<<output[0].src<<"--"<<output[0].dest<<"\n";
+  cout<<output[1].src<<"--"<<output[1].dest<<"\n";
+  cout<<output[2].src<<"--"<<output[2].dest<<"\n";
+  cout<<output[3].src<<"--"<<output[3].dest<<"\n";
+  cout<<output[4].src<<"--"<<output[4].dest<<"\n";
+  cout<<output[5].src<<"--"<<output[5].dest<<"\n";*/
+ // cout<<n<<"\n";
+  for(int m=0;m<n-1;m++)
+  cout<<output[m].src<<"--"<<output[m].dest<<"with weight"<<output[m].weight<<"\n";
+
+}
+
+
+int main()
+{
+    int n,e;
+    cin>>n>>e;
+    edge *input = new edge[e];
+    for(int i=0;i<e;i++)
+    {
+        int s,d,w;
+        cin>>s>>d>>w;
+        input[i].src=s;
+        input[i].dest=d;
+        input[i].weight=w;
+    }
+    kruskal(input,n,e);
+    return 0;
+
+}
+//easy code//
+/*
+vector<int> parent;
+vector<int> rnk;
+bool cmp(const vector<int> &v1,const vector<int> &v2)
+{
+    return v1[2]<v2[2];
+}
+int find(int x)
+{
+    if(parent[x] != x)
+    {
+        parent[x] = find(parent[x]);
+    }
+    return parent[x];
+}
+void Union(int x1,int x2)
+{
+    x1 = find(x1);
+    x2 = find(x2);
+    if(rnk[x1] < rnk[x2])
+    {
+        parent[x1] = x2;
+    }
+    else if(rnk[x2] < rnk[x1])
+    {
+        parent[x2] = x1;
+    }
+    else
+    {
+        parent[x1] = x2;
+        rnk[x2]++;
+    }
+}
+int Solution::solve(int a, vector<vector<int> > &b) {
+    parent.clear();
+    rnk.clear();
+    sort(b.begin(),b.end(), cmp);
+    parent = vector<int>(a+1,0);
+    rnk = vector<int>(a+1,0);
+    for(int i=1; i<=a; i++)
+    {
+        parent[i] = i;
+    }
+    int count = 0,ans=0;
+    for(vector<int> i : b)
+    {
+        int x1 = find(i[0]);
+        int x2 = find(i[1]);
+        if(x1 != x2)
+        {
+            count++;
+            ans += i[2];
+            Union(i[0],i[1]);
+        }
+        if(count == a-1) break;
+    }
+    return ans;
+}
+*/
